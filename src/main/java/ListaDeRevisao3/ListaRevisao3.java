@@ -6,17 +6,14 @@ import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class ListaRevisao3 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Estruturas de dados
         Pet[] lista = new Pet[5];
         int total = 0;
         int opcao = -1;
 
-        // Fila de banho
         ArrayDeque<String> filaBanho = new ArrayDeque<>();
 
         while (opcao != 0) {
@@ -31,10 +28,9 @@ public class ListaRevisao3 {
             System.out.println("0 - Sair");
             System.out.print("Escolha: ");
 
-            // Tratamento de erro do menu
             try {
                 opcao = sc.nextInt();
-                sc.nextLine(); // Limpa o buffer do teclado
+                sc.nextLine();
 
                 switch (opcao) {
                     case 1:
@@ -51,9 +47,8 @@ public class ListaRevisao3 {
 
                         System.out.print("Peso (kg): ");
                         double peso = sc.nextDouble();
-                        sc.nextLine(); // Limpa o buffer
+                        sc.nextLine();
 
-                        // Instanciação polimórfica
                         Pet novoPet;
                         if (especie.equalsIgnoreCase("Cachorro")) {
                             novoPet = new Cachorro();
@@ -63,10 +58,11 @@ public class ListaRevisao3 {
                             novoPet = new Pet();
                         }
 
-                        novoPet.nome = nome;
-                        novoPet.especie = especie;
-                        novoPet.peso = peso;
-                        novoPet.porte = novoPet.definirPorte(); // Calcula o porte automaticamente
+                        // Usando os setters para preencher os dados privados
+                        novoPet.setNome(nome);
+                        novoPet.setEspecie(especie);
+                        novoPet.setPeso(peso);
+                        novoPet.setPorte(novoPet.definirPorte());
 
                         lista[total] = novoPet;
                         total++;
@@ -80,9 +76,8 @@ public class ListaRevisao3 {
                         } else {
                             System.out.println("\n--- PETS CADASTRADOS ---");
                             for (int i = 0; i < total; i++) {
-                                // Exemplo de sobrecarga : chamando a ficha completa
                                 mostrarFichaPet(lista[i], "=== FICHA DO PET ===");
-                                lista[i].emitirSom(); // Polimorfismo (Questão 15)
+                                lista[i].emitirSom();
                                 System.out.println();
                             }
                         }
@@ -94,8 +89,9 @@ public class ListaRevisao3 {
                         boolean achou = false;
 
                         for (int i = 0; i < total; i++) {
-                            if (lista[i].nome.equalsIgnoreCase(busca)) {
-                                System.out.println("Encontrado: " + lista[i].nome + " (" + lista[i].especie + ") - " + lista[i].peso + " kg");
+                            // Usando getter para buscar
+                            if (lista[i].getNome().equalsIgnoreCase(busca)) {
+                                System.out.println("Encontrado: " + lista[i].getNome() + " (" + lista[i].getEspecie() + ") - " + lista[i].getPeso() + " kg");
                                 achou = true;
                             }
                         }
@@ -106,10 +102,9 @@ public class ListaRevisao3 {
                         break;
 
                     case 4:
-                        // HashSet para espécies sem repetição
                         HashSet<String> especiesUnicas = new HashSet<>();
                         for (int i = 0; i < total; i++) {
-                            especiesUnicas.add(lista[i].especie);
+                            especiesUnicas.add(lista[i].getEspecie());
                         }
 
                         System.out.println("\n--- ESPÉCIES CADASTRADAS ---");
@@ -134,7 +129,7 @@ public class ListaRevisao3 {
                             String proximo = filaBanho.peek();
                             System.out.println("Próximo da fila: " + proximo);
                             System.out.println("Atendendo " + proximo + "...");
-                            filaBanho.poll(); // Remove o primeiro da fila
+                            filaBanho.poll();
                             System.out.println("Fila agora: " + filaBanho);
                         }
                         break;
@@ -143,7 +138,6 @@ public class ListaRevisao3 {
                         System.out.print("Nome do pet para os serviços: ");
                         String nomeServico = sc.nextLine();
 
-                        // Lista de serviços usando Interface (Questão 13)
                         ArrayList<Servico> servicos = new ArrayList<>();
                         servicos.add(new Banho());
                         servicos.add(new Tosa());
@@ -164,96 +158,23 @@ public class ListaRevisao3 {
 
             } catch (InputMismatchException e) {
                 System.out.println("Digite apenas números!");
-                sc.nextLine(); // Limpa o buffer para evitar loop infinito
+                sc.nextLine();
             }
         }
         sc.close();
     }
 
-
+    // Sobrecarga de Métodos usando Getters
     static void mostrarFichaPet(Pet p) {
-        System.out.println("Nome: " + p.nome);
+        System.out.println("Nome: " + p.getNome());
         System.out.println("---");
     }
 
     static void mostrarFichaPet(Pet p, String titulo) {
         System.out.println(titulo);
-        System.out.println("Nome: " + p.nome);
-        System.out.println("Espécie: " + p.especie);
-        System.out.println("Peso: " + p.peso + " kg");
-        System.out.println("Porte: " + p.porte);
-    }
-}
-
-
-// CLASSE MÃE: Pet
-
-class Pet {
-    String nome;
-    String especie;
-    double peso;
-    String porte;
-
-    // Método para definir o porte com base no peso
-    String definirPorte() {
-        if (peso < 10) {
-            return "Pequeno";
-        } else if (peso < 25) {
-            return "Médio";
-        } else {
-            return "Grande";
-        }
-    }
-
-    // Método genérico de som
-    void emitirSom() {
-        System.out.println(nome + " faz algum som.");
-    }
-}
-
-
-
-// CLASSES FILHAS: Cachorro e Gato
-
-class Cachorro extends Pet {
-    @Override
-    void emitirSom() {
-        System.out.println(nome + " faz: Au au!");
-    }
-}
-
-class Gato extends Pet {
-    @Override
-    void emitirSom() {
-        System.out.println(nome + " faz: Miau!");
-    }
-}
-
-
-
-// INTERFACE E CLASSES DE SERVIÇO
-
-interface Servico {
-    void executar(String nomePet);
-}
-
-class Banho implements Servico {
-    @Override
-    public void executar(String nomePet) {
-        System.out.println("Dando banho em " + nomePet + "...");
-    }
-}
-
-class Tosa implements Servico {
-    @Override
-    public void executar(String nomePet) {
-        System.out.println("Tosando " + nomePet + "...");
-    }
-}
-
-class Consulta implements Servico {
-    @Override
-    public void executar(String nomePet) {
-        System.out.println("Levando " + nomePet + " para a consulta...");
+        System.out.println("Nome: " + p.getNome());
+        System.out.println("Espécie: " + p.getEspecie());
+        System.out.println("Peso: " + p.getPeso() + " kg");
+        System.out.println("Porte: " + p.getPorte());
     }
 }
