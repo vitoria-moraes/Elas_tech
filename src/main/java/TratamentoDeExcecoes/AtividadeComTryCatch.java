@@ -1,17 +1,29 @@
 package TratamentoDeExcecoes;
 
-public class TratamentoDeExcecoes {
+import java.util.Scanner;
+
+public class AtividadeComTryCatch {
     public static void main(String[] args) {
-        /*1 — Faça um programa que peça dois números inteiros e mostre a divisão do primeiro pelo segundo. Se a pessoa digitar 0 no segundo, trate a ArithmeticException e mostre uma mensagem explicando que não dá pra dividir por zero.
 
-2 — Crie um array com 5 notas. Peça uma posição para a pessoa e mostre a nota daquela posição. Se a posição não existir, trate a ArrayIndexOutOfBoundsException e avise que o array só vai de 0 a 4.
+/*6 — Crie um array com 3 nomes. Mostre o
+nome da posição 5 de propósito e trate a
+ArrayIndexOutOfBoundsException com a mensagem
+"Essa posição não existe." Depois do try/catch,
+imprima "O programa continua funcionando."*/
 
-3 — Peça a idade da pessoa com scanner.nextInt(). Se ela digitar um texto em vez de um número, trate a InputMismatchException e mostre uma mensagem pedindo um número.
+        // Criando um array com 3 nomes (posições 0, 1 e 2)
+        String[] nomes = {"Ana", "Carlos", "Beatriz"};
 
-4 — Crie uma variável String nome = null; e tente imprimir nome.length(). Trate a NullPointerException e mostre "O nome não foi preenchido."
+        try {
+            // Tentando acessar a posição 5 de propósito (o array só vai até o índice 2)
+            System.out.println(nomes[5]);
 
-5 — Peça um número para a pessoa e mostre o resto da divisão de 100 por esse número. Trate a ArithmeticException para o caso de ela digitar 0.
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Bloco executado quando tentamos acessar um índice inválido
+            System.out.println("Essa posição não existe.");
+        }
 
-6 — Crie um array com 3 nomes. Mostre o nome da posição 5 de propósito e trate a ArrayIndexOutOfBoundsException com a mensagem "Essa posição não existe." Depois do try/catch, imprima "O programa continua funcionando."*/
+        // Esta linha fica fora do bloco try/catch e é executada normalmente após o tratamento do erro
+        System.out.println("O programa continua funcionando.");
     }
 }

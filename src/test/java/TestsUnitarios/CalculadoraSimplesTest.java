@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
+package TestsUnitarios;
 
 public class CalculadoraSimplesTest {
+
 }
