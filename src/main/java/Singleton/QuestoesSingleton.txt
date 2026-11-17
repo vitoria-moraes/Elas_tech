@@ -1,0 +1,17 @@
+// O que o padrão Singleton garante?
+b) Que exista apenas um objeto da classe no programa
+
+// Por que o construtor de um Singleton é private?
+Para impedir que outras classes criem novos objetos usando o "new",
+obrigando todo mundo a pegar a instancia unica pelo metodo getInstancia().
+
+// Complete a lacuna:
+private ______ Configuracao instancia;
+c) static
+
+// O que acontece se alguém tentar escrever isto fora da classe?
+Configuracao c = new Configuracao();
+Vai dar erro de compilação, porque o construtor é privado e não pode ser acessado de fora da classe.
+
+// Qual é a forma correta de obter o objeto de um Singleton chamado Configuracao?
+b) Configuracao.getInstancia()

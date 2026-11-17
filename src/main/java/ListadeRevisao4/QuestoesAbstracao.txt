@@ -1,0 +1,22 @@
+a) Explique, com suas palavras, o que é abstração em programação orientada a objetos.
+
+R : É o princípio de focar apenas no que é essencial e relevante de um objeto ou problema
+ para o sistema, escondendo os detalhes complexos de como aquilo funciona internamente
+ (expor o que o objeto faz, e não como ele faz).
+
+b) Qual a diferença entre abstração e encapsulamento?
+
+R : A abstração atua no nível de design/modelagem (simplificar
+ a realidade e definir contratos/interfaces, ocultando complexidade).
+ O encapsulamento atua na proteção dos dados e implementação (esconder
+ atributos com private e controlar o acesso/validação via getters,
+ setters e métodos).
+
+ c) Quando você usa lista.add("Ana"), você sabe como o Java guarda esse elemento na memória?
+ Por que isso é um exemplo de abstração?
+
+R : Não precisamos saber se o Java redimensionou um array interno,
+ alocou ponteiros ou reorganizou índices na memória. Isso é
+ abstração porque a interface da List expõe uma operação simples (add),
+ escondendo toda a complexidade estrutural por trás dela.
+

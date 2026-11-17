@@ -1,0 +1,9 @@
+// Explique quem pode acessar um atributo ou método declarado com cada modificador:
+
+a) private: Apenas a própria classe onde foi declarado.
+
+b) default (sem modificador): A própria classe e outras classes que estejam no mesmo pacote (package).
+
+c) protected: A própria classe, outras classes do mesmo pacote, e subclasses (via herança), mesmo que estejam em pacotes diferentes.
+
+d) public: Qualquer classe de qualquer pacote do projeto.

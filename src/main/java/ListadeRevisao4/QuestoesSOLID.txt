@@ -1,0 +1,50 @@
+//Para cada código abaixo, diga qual princípio do SOLID está sendo violado e explique como você corrigiria.
+
+a)
+java
+class Relatorio {
+    void calcularTotais() { /* ... */ }
+    void formatarEmPdf() { /* ... */ }
+    void salvarNoDisco() { /* ... */ }
+    void enviarPorEmail() { /* ... */ }
+}
+
+R : Princípio violado: SRP (Single Responsibility Principle — Princípio da Responsabilidade Única).
+Como corrigir: A classe tem 4 motivos diferentes para mudar (regra de negócio,
+layout PDF, persistência em disco e envio de e-mail). Deve-se dividir em classes
+separadas: CalculadoraRelatorio, FormatadorPdf, RelatorioRepository e EnviadorEmail.
+
+b)
+java
+class EnviadorEmail {
+    void enviar(String tipo) {
+        if (tipo.equals("aniversario")) {
+            System.out.println("Feliz aniversário!");
+        } else if (tipo.equals("seguranca")) {
+            System.out.println("Alerta de segurança!");
+        } else if (tipo.equals("promocao")) {
+            System.out.println("Promoção imperdível!");
+        }
+    }
+}
+
+R : Princípio violado: OCP (Open/Closed Principle — Princípio Aberto/Fechado).
+    Como corrigir: Toda vez que surgir um novo tipo de e-mail, será necessário
+    alterar o if/else da classe. Deve-se criar uma interface TemplateEmail
+    (com método gerarMensagem()) e implementar classes separadas (EmailAniversario,
+    EmailSeguranca, EmailPromocao), fazendo o EnviadorEmail apenas receber a interface.
+
+c)
+java
+class PedidoService {
+    private MySQLRepositorio repo = new MySQLRepositorio();
+
+    void finalizar() {
+        repo.salvar();
+    }
+}
+
+R : Princípio violado: DIP (Dependency Inversion Principle — Princípio da Inversão de Dependência).
+    Como corrigir: A classe de alto nível (PedidoService) está acoplada diretamente a uma
+    implementação concreta de baixo nível (MySQLRepositorio). Deve-se criar uma interface
+    PedidoRepositorio e recebê-la via construtor (Injeção de Dependência).
