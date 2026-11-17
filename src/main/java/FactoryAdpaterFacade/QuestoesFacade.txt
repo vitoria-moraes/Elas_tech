@@ -1,0 +1,13 @@
+// Explique com suas palavras qual problema o Factory resolve.
+O que aconteceria se os ifs que decidem qual objeto criar ficassem
+espalhados pelo main e por outras partes do programa,
+e depois surgisse um tipo novo?
+
+R : O Factory centraliza a criação de objetos em um único lugar,
+escondendo a lógica de qual classe concreta instanciar. Se os ifs
+ficassem espalhados pelo programa e surgisse um tipo novo, seria
+preciso caçar e alterar cada trecho de código manualmente, aumentando
+o acoplamento e a chance de esquecer algum lugar.
+
+// O método da fábrica normalmente devolve o objeto criado com qual tipo?
+b) O tipo da interface (exemplo : Animal)

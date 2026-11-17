@@ -1,0 +1,15 @@
+//Explique com suas palavras qual problema o
+Facade resolve. Se quiser, use o exemplo do síndico
+do condomínio ou crie outro.
+
+R : O Facade resolve a complexidade de lidar com várias
+classes diferentes para executar uma única tarefa. Assim como
+o síndico do condomínio resolve toda a burocracia com portaria,
+limpeza e manutenção para o morador não precisar falar com cada
+um separado, o Facade oferece um método simples que coordena todas
+as chamadas internas na ordem certa.
+
+// Marque V (verdadeiro) ou F (falso):
+( F ) A fachada precisa implementar uma interface.
+( V ) A fachada guarda as classes envolvidas no processo em atributos.
+( F ) Depois que a fachada existe, é proibido usar as outras pclasses diretamente.

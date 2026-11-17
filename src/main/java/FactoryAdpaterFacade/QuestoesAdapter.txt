@@ -1,0 +1,14 @@
+//Seu sistema precisa usar uma classe de pagamento
+de outra empresa, mas ela não implementa a sua interface.
+Por que não dá para simplesmente escrever implements na classe dela?
+O que você faz no lugar?
+
+R : Porque a classe é externa (de terceiros ou biblioteca pronta)
+e não temos acesso ou permissão para alterar seu código-fonte.
+No lugar disso, criamos uma classe Adapter que implementa a
+nossa interface, guarda a classe externa como atributo e traduz
+a chamada do nosso método para o método dela.
+
+
+//Em um Adapter, onde fica a tradução (por exemplo, a conversão de dólar para real)?
+c) No método implementado da interface, dentro do adapter
