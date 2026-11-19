@@ -1,0 +1,27 @@
+//Na sinceridade: Por que testar o sistema apenas dando
+System.out.println() dentro do método main ("teste no olho")
+não funciona quando o projeto cresce na empresa?
+
+R : Porque conforme o sistema ganha dezenas ou
+centenas de regras, ninguém consegue conferir
+manualmente todas as saídas no console a cada
+alteração; é lento, sujeito a erro humano e não
+avisa automaticamente quando uma mudança nova quebra algo antigo.
+
+//Detetive de Código: Uma colega escreveu
+um método de teste perfeito com assertEquals,
+clicou para rodar a classe de teste, mas o JUnit
+ignorou o método dela completamente! Qual anotação
+ela esqueceu de colocar em cima do método?
+
+R : Ela esqueceu a anotação @Test.
+
+Refatoração sem medo: No ciclo do TDD, por que a
+gente só faz o Refactor (deixar o código bonito e limpo)
+depois que o teste já ficou Verde?
+
+R : Porque com o teste passando (verde),
+temos uma rede de segurança automática:
+se durante a limpeza do código alterarmos
+sem querer o comportamento esperado, o teste
+falha na hora e avisa.

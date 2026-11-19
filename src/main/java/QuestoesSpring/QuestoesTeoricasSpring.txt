@@ -1,0 +1,139 @@
+1 - O que é uma API?
+É uma ponte de comunicação entre sistemas
+que permite que uma aplicação peça dados ou
+execute ações em outra sem precisar saber
+como ela foi feita por dentro.
+
+2 - O que é JSON?
+É um formato leve de texto usado para trocar
+dados entre sistemas (como entre o front-end
+e o back-end), organizado em pares de chave e
+valor, parecido com um dicionário ou objeto.
+
+3 - O que é HTTP?
+É o protocolo de comunicação da web que define
+as regras de como o cliente (navegador ou aplicativo)
+faz pedidos (requisições) e como o servidor
+devolve as respostas.
+
+4 - O que é Controller?
+É a classe responsável por receber as requisições
+que chegam na API, interpretar os dados enviados,
+chamar a lógica necessária e devolver a resposta
+adequada para o cliente.
+
+5 - O que é um verbo HTTP?
+É a ação que indica o que o cliente quer fazer com
+um recurso no servidor (por exemplo: buscar,
+criar, atualizar ou apagar).
+
+6 - O que é um Recurso?
+É qualquer entidade ou informação importante
+do sistema que a API disponibiliza para ser
+acessada ou manipulada, como usuários, produtos
+ou funcionários.
+
+7 - O que é um PATH (id)?
+É um valor variável passado diretamente no
+caminho da URL para identificar um recurso
+específico, como o "5" em /funcionarios/5
+para buscar apenas o funcionário de id 5.
+
+8 - O que é um Query Parameter?
+É um parâmetro opcional passado no final da
+URL depois do ponto de interrogação (?) no
+formato chave=valor, usado geralmente para
+filtrar, ordenar ou paginar resultados
+(ex.: ?cargo=dev).
+
+9 - O que é Rest?
+É um estilo de arquitetura (conjunto de boas
+práticas) para construir APIs sobre o protocolo
+HTTP usando URLs bem definidas para os recursos,
+verbos HTTP corretos e troca de dados geralmente em JSON.
+
+10 - O que é um endpoint?
+É o endereço completo e específico da API onde um
+serviço pode ser acessado, formado pela combinação
+da URL com o verbo HTTP (ex.: GET http://localhost:8080/funcionarios).
+
+11 - Quais são as partes de uma URL? (ex: http://localhost:8080/funcionarios)
+- Protocolo: http://
+- Host / Domínio: localhost
+- Porta: 8080
+- Caminho (Path / Recurso): /funcionarios
+
+12 - O que é um status code? O que significam o 200 e o 404?
+É um código numérico de 3 dígitos que o servidor
+devolve na resposta para informar se a requisição
+deu certo ou se houve algum erro.
+- 200 (OK): A requisição foi processada com sucesso.
+- 404 (Not Found): O recurso ou endereço solicitado
+não foi encontrado no servidor.
+
+13 - O que é o corpo (body) de uma requisição?
+É a parte da requisição onde enviamos os dados detalhados
+ (geralmente em JSON) para o servidor processar,
+ como o nome, cargo e salário ao cadastrar um novo funcionário.
+
+14 - O que é MVC? O que faz cada letra?
+É um padrão de arquitetura que divide o sistema em três camadas:
+- M (Model): Representa os dados, entidades e regras de negócio.
+- V (View): É a interface visual que o usuário vê (ou o JSON retornado em uma API).
+- C (Controller): É o intermediário que recebe as requisições,
+aciona o Model e devolve a resposta.
+
+15 - O que é o Spring Boot?
+É um framework Java que facilita e acelera a criação de
+aplicações e APIs, trazendo configurações prontas,
+servidor embutido (como o Tomcat) e gerenciamento
+simples de dependências.
+
+16 - O que é uma anotação no Spring? Dê um exemplo.
+É um marcador iniciado com @ colocado acima de classes,
+métodos ou atributos para dar instruções ao Spring
+sobre como ele deve gerenciar ou configurar aquele
+trecho de código. Exemplo: @SpringBootApplication
+ou @RestController.
+
+17 - O que faz o @RestController?
+Indica ao Spring que aquela classe é um controlador
+de API REST e que o retorno dos seus métodos deve
+ser enviado diretamente no corpo da resposta
+(automaticamente convertido para JSON), e não como uma página HTML.
+
+18 - O que faz o @GetMapping?
+Mapeia requisições HTTP do tipo GET para um método
+específico do Controller, ligando uma rota/URL à busca de dados.
+
+19 - Quais são os verbos HTTP?
+Os principais são:
+- GET: Buscar/consultar dados.
+- POST: Criar/cadastrar um novo recurso.
+- PUT: Atualizar um recurso inteiro existente.
+- PATCH: Atualizar parcialmente um recurso.
+- DELETE: Remover/apagar um recurso.
+
+20 - O que faz o @PathVariable?
+Captura um valor dinâmico que veio na própria rota
+da URL (como /{id}) e passa esse valor para um
+parâmetro do método no Controller.
+
+21 - O que faz o @RequestParam?
+Captura os parâmetros de consulta enviados
+após o "?" na URL (query parameters) e os entrega
+como variáveis dentro do método no Controller.
+
+22 - O que significam os status 201 e 204?
+- 201 (Created): A requisição deu certo e um
+novo recurso foi criado no servidor (muito usado no POST).
+- 204 (No Content): A requisição deu certo,
+mas o servidor não tem nenhum conteúdo para
+devolver no corpo da resposta (comum no DELETE ou PUT).
+
+23 - O que é um Repository?
+É a camada (geralmente uma interface) responsável
+pela comunicação direta com o banco de dados,
+cuidando de salvar, buscar, atualizar e deletar
+os registros sem precisar escrever SQL manual
+para operações básicas.

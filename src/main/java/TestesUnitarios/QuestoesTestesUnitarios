@@ -1,0 +1,37 @@
+//(Cenário Real) A equipe mexeu na classe CalculadoraFrete
+para adicionar entrega por Drone, mas sem querer estragou o
+cálculo antigo do Sedex. Qual é a principal vantagem de
+ter Testes Unitários nesse momento?
+
+B) O teste apita Vermelho imediatamente na máquina da
+programadora antes de o bug ir para o cliente (evitando regressão).
+
+//Olhando para a Pirâmide de Testes, por que os Testes
+Unitários ficam na base (representando cerca de 70% dos
+testes de uma empresa)?
+
+C) Porque eles testam pequenas partes isoladas do código,
+rodando em milissegundos e sendo muito mais baratos e fáceis de manter.
+
+//No JUnit 5, nós organizamos nosso método de teste
+seguindo o padrão AAA (Arrange, Act, Assert).
+O que fazemos na etapa "Assert"?
+
+B) Usamos os comandos do JUnit (como assertEquals ou assertTrue)
+para verificar se o resultado obtido bateu com o esperado.
+
+//Qual comando do JUnit 5 você deve usar para garantir
+que o método conta.sacar(-50.0) bloqueia a operação
+lançando uma exceção (IllegalArgumentException)?
+
+D) assertThrows(IllegalArgumentException.class, () -> conta.sacar(-50.0));
+
+//No TDD (Test-Driven Development), trabalhamos no
+ciclo Red -> Green -> Refactor. O que significa
+a etapa "GREEN" (Verde)?
+
+B) Escrever o código mais simples e direto possível
+na classe principal apenas para fazer o teste passar e ficar verde.
+
+
+

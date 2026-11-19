@@ -1,0 +1,35 @@
+// Qual problema o padrão Observer resolve? Dê um exemplo
+do dia a dia que funcione como ele.
+
+R : Ele resolve o problema de avisar automaticamente vários
+objetos diferentes sempre que o estado de um objeto principal
+muda, sem que eles precisem ficar verificando o tempo todo se
+algo mudou. Um exemplo do dia a dia é se inscrever em um canal no
+YouTube e ativar o sininho: o canal não sabe quem são todos os
+inscritos individualmente, mas sempre que sai vídeo novo, ele
+dispara a notificação para todo mundo que esta na lista de inscritos.
+
+// No Observer, o que é o Subject e o que é o Observer?
+Como o Subject avisa os observadores sem conhecer
+as classes concretas deles?
+
+R : O Subject é o objeto observado (quem guarda o
+estado que muda e mantém a lista de interessados,
+como o Voo ou o Pedido). O Observer é quem quer ser
+avisado quando essa mudança acontece (como o Passageiro
+ou o Painel). O Subject avisa todos sem conhecer as
+classes concretas porque ele guarda uma lista da
+interface comum (ex.: List<ObservadorVoo>) e apenas chama
+o metodo definido nessa interface (atualizar()),
+deixando cada classe concreta reagir do seu jeito.
+
+// Se você precisar adicionar um novo interessado,
+por exemplo um Entregador que também precisa saber
+quando o pedido muda de status, o que é preciso
+alterar na classe Pedido? Por quê?
+
+R : nada precisa ser alterado na classe Pedido.
+Como o Pedido trabalha apenas com a interface
+do observador (e não com classes fixas), basta
+fazer a classe Entregador implementar essa
+interface e cadastrá-la na lista de observadores do pedido.

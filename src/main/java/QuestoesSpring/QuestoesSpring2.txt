@@ -1,0 +1,92 @@
+1 - O que é uma API REST? Pra que ela serve?
+É uma ponte de comunicação entre sistemas que segue os padrões da web (HTTP) para permitir que aplicações troquem dados entre si de forma padronizada, leve e sem guardar estado (stateless).
+
+2 - Qual a diferença entre GET, POST, PUT e DELETE? Dê um exemplo de cada.
+São verbos HTTP que definem a ação sobre um recurso:
+
+GET: Busca ou lista dados sem alterar nada no servidor (ex.: GET /recados para listar todos os recados).
+
+POST: Cria um novo registro no servidor (ex.: POST /recados para cadastrar um novo recado).
+
+PUT: Atualiza um registro que já existe (ex.: PUT /recados/1 para editar o recado de id 1).
+
+DELETE: Apaga um registro existente (ex.: DELETE /recados/1 para remover o recado de id 1).
+
+3 - O que significam os status 200, 201, 400, 404 e 409?
+
+200 (OK): A requisição deu certo e o servidor devolveu o que foi pedido.
+
+201 (Created): Um novo recurso foi criado com sucesso (muito usado no POST).
+
+400 (Bad Request): Erro do cliente; os dados enviados vieram errados ou falharam na validação.
+
+404 (Not Found): O recurso ou endereço solicitado não foi encontrado no servidor.
+
+409 (Conflict): Conflito com o estado atual do banco (ex.: tentar cadastrar um patrimônio ou e-mail duplicado).
+
+4 - O que é JSON?
+É um formato leve de texto usado para trocar dados entre sistemas (como entre o Postman/front-end e o back-end), organizado em pares de chave e valor, parecido com um dicionário ou objeto.
+
+5 - Qual a função de cada camada: Controller, Service e Repository?
+
+Controller: Porta de entrada da API; recebe as requisições HTTP, lê os dados enviados e devolve a resposta ao cliente.
+
+Service: Camada de regras de negócio; processa os dados, faz validações lógicas e liga o Controller ao Repository.
+
+Repository: Camada de acesso a dados; se comunica direto com o banco para salvar, buscar, atualizar ou apagar registros.
+
+6 - O que a anotação @Entity faz?
+Indica ao JPA/Hibernate que aquela classe Java representa uma tabela no banco de dados relacional, onde cada objeto criado vira uma linha.
+
+7 - Por que o repository é uma interface, e quem escreve o código dele?
+Porque o Spring Data JPA cria a implementação automaticamente em tempo de execução (via proxy). Nós só declaramos a interface estendendo JpaRepository e o próprio Spring gera os métodos prontos (save, findAll, deleteById) por baixo dos panos.
+
+8 - O que é validar? O que o @Valid faz?
+Validar é conferir se os dados enviados cumprem as regras antes de serem processados. O @Valid (colocado no Controller) ativa as anotações de regra da entidade (como @NotBlank) assim que o JSON chega; se algo estiver inválido, ele barra a requisição e devolve erro 400.
+
+9 - Como um JSON vira uma linha no banco de dados? Descreva o caminho, do Postman até a tabela.
+
+O Postman envia o JSON via requisição POST.
+
+O Controller recebe o texto e o @RequestBody transforma o JSON em um objeto Java.
+
+O Controller passa esse objeto para o Service aplicar as regras de negócio.
+
+O Service chama o repository.save(objeto).
+
+O JPA/Hibernate converte o objeto Java em um comando SQL INSERT e grava a linha na tabela do banco.
+
+10 - E o caminho contrário: num GET /equipamentos/1, como uma linha do banco vira o JSON que aparece no Postman?
+
+O Controller recebe o GET com o id 1 (@PathVariable) e chama o Service.
+
+O Service pede ao Repository (findById(1)).
+
+O Hibernate executa um SELECT no banco, pega a linha encontrada e monta um objeto Java.
+
+O objeto volta pelo Service até o Controller.
+
+O Spring converte os atributos desse objeto Java em texto JSON (usando os getters) e devolve ao Postman com status 200.
+
+11 - Quando o Postman manda um POST /equipamentos/cadastrar, como o Spring sabe qual método de qual controller chamar?
+Quando o projeto sobe, o Spring mapeia todas as classes com @RestController e junta a rota base do @RequestMapping com o verbo e o caminho de cada método (@PostMapping("/cadastrar")). Quando a requisição chega, o Spring consulta esse mapa de rotas e chama o método exato que bate com a URL e o verbo HTTP.
+
+12 - O @Valid barrou o pedido. O Service ficou sabendo? E o banco?
+Não, nenhum dos dois ficou sabendo. A validação do @Valid acontece na entrada do Controller antes mesmo do método rodar, então o pedido é barrado ali mesmo com status 400 e nunca chega no Service nem no banco.
+
+13 - Qual a diferença entre o @NotBlank na entidade e o nullable = false no @Column? Se os dois barram o mesmo nome vazio, por que ter os dois?
+
+@NotBlank: Valida no Java antes de ir ao banco, barrando texto nulo, vazio ("") ou só com espaços ("   ") e devolvendo um erro 400 amigável.
+
+nullable = false: Cria a restrição NOT NULL direto na coluna da tabela no banco de dados.
+
+Por que ter os dois: O @NotBlank evita viagens desnecessárias ao banco e barra espaços em branco na API, enquanto o nullable = false garante a segurança dos dados direto no banco caso algo seja inserido por fora da aplicação.
+
+14 - Ontem os dados sumiam quando o servidor reiniciava, e hoje não somem mais. O que mudou, e onde?
+Mudou a configuração do banco H2 no arquivo application.properties. Antes ele estava configurado para rodar em memória (jdbc:h2:mem:...), onde tudo apaga ao desligar o servidor; hoje foi alterado para salvar em arquivo no disco (jdbc:h2:file:...) com ddl-auto=update, mantendo os dados salvos ao reiniciar.
+
+15 - Quem cria as tabelas no banco? Em algum momento a gente escreveu CREATE TABLE? Como isso acontece?
+Quem cria é o Hibernate (implementação do JPA). Nós não escrevemos CREATE TABLE manual; ao iniciar a aplicação, o Hibernate lê as classes marcadas com @Entity, olha seus atributos e gera os comandos SQL de criação/atualização das tabelas automaticamente no banco.
+
+16 - O nome existsByPatrimonio é só um nome, e ninguém escreveu o código dele. Como o Spring sabe o que esse método tem que fazer?
+O Spring Data JPA lê e interpreta as palavras-chave do nome do método (Derived Query). Ele entende que "existsBy" significa retornar um verdadeiro/falso verificando se existe no banco, e "Patrimonio" é o nome do atributo na entidade, montando o SELECT COUNT(*) ... WHERE patrimonio = ? automaticamente.
